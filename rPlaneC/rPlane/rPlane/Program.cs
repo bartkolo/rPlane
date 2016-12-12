@@ -87,7 +87,7 @@ namespace flight1090
 
             // Read data from the client socket.
             int bytesRead = handler.EndReceive(ar);
-            string message= Encoding.ASCII.GetString(state.buffer, 0, bytesRead);
+            string message = Encoding.ASCII.GetString(state.buffer, 0, bytesRead);
 
             if (bytesRead > 0)
             {

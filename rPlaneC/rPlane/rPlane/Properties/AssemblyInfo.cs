@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("flight1090")]
+[assembly: AssemblyTitle("rPlane")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("flight1090")]
+[assembly: AssemblyProduct("rPlane")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e436e4b2-96f4-46a9-82c6-8c243775e1d4")]
+[assembly: Guid("141d6c0c-79aa-463b-9afa-f664e82eab3a")]
 
 // Version information for an assembly consists of the following four values:
 //
