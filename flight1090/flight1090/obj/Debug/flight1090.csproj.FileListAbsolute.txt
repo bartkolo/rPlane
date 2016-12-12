@@ -1,0 +1,6 @@
+c:\users\bartosz\documents\visual studio 2015\Projects\flight1090\flight1090\bin\Debug\flight1090.exe.config
+c:\users\bartosz\documents\visual studio 2015\Projects\flight1090\flight1090\bin\Debug\flight1090.exe
+c:\users\bartosz\documents\visual studio 2015\Projects\flight1090\flight1090\bin\Debug\flight1090.pdb
+c:\users\bartosz\documents\visual studio 2015\Projects\flight1090\flight1090\obj\Debug\flight1090.csprojResolveAssemblyReference.cache
+c:\users\bartosz\documents\visual studio 2015\Projects\flight1090\flight1090\obj\Debug\flight1090.exe
+c:\users\bartosz\documents\visual studio 2015\Projects\flight1090\flight1090\obj\Debug\flight1090.pdb
