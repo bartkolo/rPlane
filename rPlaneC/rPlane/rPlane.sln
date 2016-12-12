@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rPlane", "rPlane\rPlane.csproj", "{141D6C0C-79AA-463B-9AFA-F664E82EAB3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rPlaneServer", "rPlane\rPlaneServer.csproj", "{141D6C0C-79AA-463B-9AFA-F664E82EAB3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rPlaneLibrary", "rPlaneLibrary\rPlaneLibrary.csproj", "{35558003-6A1D-48C9-B6F4-B81FC1BF0914}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rPlaneUnitTest", "rPlaneUnitTest\rPlaneUnitTest.csproj", "{E2F2DBE8-A773-461F-BB26-B1FDFF4A6C1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{141D6C0C-79AA-463B-9AFA-F664E82EAB3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{141D6C0C-79AA-463B-9AFA-F664E82EAB3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{141D6C0C-79AA-463B-9AFA-F664E82EAB3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35558003-6A1D-48C9-B6F4-B81FC1BF0914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35558003-6A1D-48C9-B6F4-B81FC1BF0914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35558003-6A1D-48C9-B6F4-B81FC1BF0914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35558003-6A1D-48C9-B6F4-B81FC1BF0914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2F2DBE8-A773-461F-BB26-B1FDFF4A6C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2F2DBE8-A773-461F-BB26-B1FDFF4A6C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2F2DBE8-A773-461F-BB26-B1FDFF4A6C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2F2DBE8-A773-461F-BB26-B1FDFF4A6C1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
