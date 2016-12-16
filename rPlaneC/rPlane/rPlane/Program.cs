@@ -166,7 +166,7 @@ namespace flight1090
 
         public static int Main(String[] args)
         {
-            //StartListening();
+            StartListening();
             return 0;
         }
     }

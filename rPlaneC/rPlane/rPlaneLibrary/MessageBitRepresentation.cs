@@ -13,11 +13,11 @@ namespace rPlaneLibrary
 
         public List<bool> BitesOfMessage = new List<bool>();
 
-        public string TestMessage { get; set; }
+        public string ReceivedMessage { get; set; }
 
         public MessageBitRepresentation(string message)
         {
-            TestMessage = message;
+            ReceivedMessage = message;
             StringToByteArray(message);
         }
 
@@ -48,11 +48,11 @@ namespace rPlaneLibrary
         protected int GetIntFromBitArray(List<bool> bitArray)
         {
             var value = 0;
-
+            bitArray.Reverse();
             for (var i = 0; i < bitArray.Count; i++)
             {
                 if (bitArray[i])
-                    value += Convert.ToInt16(Math.Pow(2, i));
+                    value += Convert.ToInt32(Math.Pow(2, i));
             }
 
             return value;
