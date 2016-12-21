@@ -9,24 +9,39 @@ namespace rPlaneLibrary
 {
     public class MessageBitRepresentation
     {
+        public const string Index = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ#####_###############0123456789######";
         public BitArray MessageBitArray { get; set; }
 
         public List<bool> BitesOfMessage = new List<bool>();
 
-        public string ReceivedMessage { get; set; }
+        public List<bool> BitesOfEvenMessage;
+
+        public List<bool> BitesOfOddMessage;
+
+        public string FirsReceivedMessage { get; set; }
+
+        public string SecondReceivedMessage { get; set; }
 
         public MessageBitRepresentation(string message)
         {
-            ReceivedMessage = message;
-            StringToByteArray(message);
+            FirsReceivedMessage = message;
+            BitesOfMessage = StringToByteArray(message);
         }
 
-        public string Index = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ#####_###############0123456789######";
+        public MessageBitRepresentation(string firstMessage, string secondMessage)
+        {
+            FirsReceivedMessage = firstMessage;
+            SecondReceivedMessage = secondMessage;
+
+            BitesOfEvenMessage = StringToByteArray(FirsReceivedMessage);
+            BitesOfOddMessage = StringToByteArray(SecondReceivedMessage);
+        }
 
         #region Methods
 
-        protected void StringToByteArray(string hex)
+        protected List<bool> StringToByteArray(string hex)
         {
+            var bitesArray = new List<bool>();
             var numberChars = hex.Length;
             var bytes = new int[numberChars / 2];
             for (var i = 0; i < numberChars; i += 2)
@@ -40,9 +55,10 @@ namespace rPlaneLibrary
                     itemBites[i] = ((item >> i) & 1) == 1;
                 }
 
-                foreach (var bite in itemBites.Reverse())
-                    BitesOfMessage.Add(bite);
+                bitesArray.AddRange(itemBites.Reverse());
             }
+
+            return bitesArray;
         }
 
         protected int GetIntFromBitArray(List<bool> bitArray)
@@ -58,20 +74,30 @@ namespace rPlaneLibrary
             return value;
         }
 
-        public int DecodeMessageToInt(int from, int to)
+        public int DecodeMessageToInt(int from, int to, List<bool> bitsList = null)
         {
+            var bitesArray = BitesOfMessage;
+
+            if (bitsList != null)
+                bitesArray = bitsList;
+
             var bits = new List<bool>();
             for (var a = from; a <= to; a++)
-                bits.Add(BitesOfMessage[a]);
+                bits.Add(bitesArray[a]);
 
             return GetIntFromBitArray(bits);
         }
 
-        public List<bool> DecodeMessageToList(int from, int to)
+        public List<bool> DecodeMessageToList(int from, int to, List<bool> bitsList = null)
         {
+            var bitesArray = BitesOfMessage;
+
+            if (bitsList != null)
+                bitesArray = bitsList;
+
             var bits = new List<bool>();
             for (var a = from; a <= to; a++)
-                bits.Add(BitesOfMessage[a]);
+                bits.Add(bitesArray[a]);
 
             return bits;
         }
