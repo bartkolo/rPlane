@@ -40,7 +40,7 @@ namespace flight1090
             // running the listener is "host.contoso.com".
             IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 30001);
+            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5555);
 
             // Create a TCP/IP socket.
             Socket listener = new Socket(AddressFamily.InterNetwork,
