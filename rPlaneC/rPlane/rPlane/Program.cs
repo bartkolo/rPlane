@@ -4,27 +4,27 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace flight1090
+namespace rPlane
 {
     public class StateObject
     {
         // Client  socket.
-        public Socket workSocket = null;
+        public Socket WorkSocket = null;
 
         // Size of receive buffer.
         public const int BufferSize = 1024;
 
         // Receive buffer.
-        public byte[] buffer = new byte[BufferSize];
+        public byte[] Buffer = new byte[BufferSize];
 
         // Received data string.
-        public StringBuilder sb = new StringBuilder();
+        public StringBuilder Sb = new StringBuilder();
     }
 
     public class AsynchronousSocketListener
     {
         // Thread signal.
-        public static ManualResetEvent allDone = new ManualResetEvent(false);
+        public static ManualResetEvent AllDone = new ManualResetEvent(false);
 
         public AsynchronousSocketListener()
         {
@@ -40,7 +40,7 @@ namespace flight1090
             // running the listener is "host.contoso.com".
             IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
             IPAddress ipAddress = ipHostInfo.AddressList[0];
-            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5555);
+            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse(ipAddress.ToString()), 5555);
 
             // Create a TCP/IP socket.
             Socket listener = new Socket(AddressFamily.InterNetwork,
@@ -55,7 +55,7 @@ namespace flight1090
                 while (true)
                 {
                     // Set the event to nonsignaled state.
-                    allDone.Reset();
+                    AllDone.Reset();
 
                     // Start an asynchronous socket to listen for connections.
                     Console.WriteLine("Waiting for a connection...");
@@ -64,7 +64,7 @@ namespace flight1090
                         listener);
 
                     // Wait until a connection is made before continuing.
-                    allDone.WaitOne();
+                    AllDone.WaitOne();
                 }
             }
             catch (Exception e)
@@ -78,42 +78,38 @@ namespace flight1090
 
         public static void ReadCallback(IAsyncResult ar)
         {
-            String content = String.Empty;
-
             // Retrieve the state object and the handler socket
             // from the asynchronous state object.
             StateObject state = (StateObject)ar.AsyncState;
-            Socket handler = state.workSocket;
+            Socket handler = state.WorkSocket;
 
             // Read data from the client socket.
             int bytesRead = handler.EndReceive(ar);
-            string message = Encoding.ASCII.GetString(state.buffer, 0, bytesRead);
+            string message = Encoding.ASCII.GetString(state.Buffer, 0, bytesRead);
 
-            if (bytesRead > 0)
+            if (bytesRead <= 0) return;
+            // There  might be more data, so store the data received so far.
+            state.Sb.Append(Encoding.ASCII.GetString(
+                state.Buffer, 0, bytesRead));
+
+            // Check for end-of-file tag. If it is not there, read
+            // more data.
+            var content = state.Sb.ToString();
+            if (content.IndexOf("<EOF>") > -1)
             {
-                // There  might be more data, so store the data received so far.
-                state.sb.Append(Encoding.ASCII.GetString(
-                    state.buffer, 0, bytesRead));
-
-                // Check for end-of-file tag. If it is not there, read
-                // more data.
-                content = state.sb.ToString();
-                if (content.IndexOf("<EOF>") > -1)
-                {
-                    // All the data has been read from the
-                    // client. Display it on the console.
-                    Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
-                        content.Length, content);
-                    // Echo the data back to the client.
-                    //Send(handler, content);
-                }
-                else
-                {
-                    Console.WriteLine(message);
-                    // Not all data received. Get more.
-                    handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
-                        new AsyncCallback(ReadCallback), state);
-                }
+                // All the data has been read from the
+                // client. Display it on the console.
+                Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
+                    content.Length, content);
+                // Echo the data back to the client.
+                //Send(handler, content);
+            }
+            else
+            {
+                Console.WriteLine(message);
+                // Not all data received. Get more.
+                handler.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
+                    new AsyncCallback(ReadCallback), state);
             }
         }
 
@@ -131,7 +127,7 @@ namespace flight1090
         public static void AcceptCallback(IAsyncResult ar)
         {
             // Signal the main thread to continue.
-            allDone.Set();
+            AllDone.Set();
 
             // Get the socket that handles the client request.
             Socket listener = (Socket)ar.AsyncState;
@@ -139,8 +135,8 @@ namespace flight1090
 
             // Create the state object.
             StateObject state = new StateObject();
-            state.workSocket = handler;
-            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+            state.WorkSocket = handler;
+            handler.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
                 new AsyncCallback(ReadCallback), state);
         }
 

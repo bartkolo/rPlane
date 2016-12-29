@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace rPlaneLibrary
+namespace rPlaneLibrary.Decoder
 {
     public class MessageBitRepresentation
     {
@@ -36,8 +36,6 @@ namespace rPlaneLibrary
             BitesOfEvenMessage = StringToByteArray(FirsReceivedMessage);
             BitesOfOddMessage = StringToByteArray(SecondReceivedMessage);
         }
-
-        #region Methods
 
         protected List<bool> StringToByteArray(string hex)
         {
@@ -101,7 +99,5 @@ namespace rPlaneLibrary
 
             return bits;
         }
-
-        #endregion Methods
     }
 }

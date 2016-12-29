@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace rPlaneLibrary
+namespace rPlaneLibrary.Decoder
 {
     public class AircraftPosition : MessageBitRepresentation
     {
@@ -31,7 +31,9 @@ namespace rPlaneLibrary
             var j = GetLatitudeIndex(LatCprEven, LatCprOdd);
 
             var latE = 6 * (((j - 60 * Math.Floor((double)j / 60)) + LatCprEven));
-            var latO = 6D * ((j - 59 * Math.Floor((double)j / 59)) + LatCprOdd);
+
+            const double airD = 360.0 / 59.0;
+            var latO = airD * ((j - 59 * Math.Floor((double)j / 59)) + LatCprOdd);
 
             if (latE > 270)
                 latE -= 360;
@@ -52,17 +54,19 @@ namespace rPlaneLibrary
             if (TimeE >= TimeO)
             {
                 var ni = Math.Max(ZoneE, 1);
-                double dLon = 360 / ni;
+                var dLon = 360.0 / ni;
                 var m = Math.Floor(LonCprEven * (ZoneE - 1) - LonCprOdd * ZoneE + 0.5);
                 longitude = dLon * ((m - ni * Math.Floor(m / ni)) + LonCprEven);
+                if (longitude > 180) longitude = longitude - 360;
                 return longitude;
             }
             else
             {
                 var ni = Math.Max(ZoneO - 1, 1);
-                double dLon = 360 / ni;
+                double dLon = 360.0 / ni;
                 var m = Math.Floor(LonCprEven * (ZoneO - 1) - LonCprOdd * ZoneO + 0.5);
                 longitude = dLon * ((m - ni * Math.Floor(m / ni)) + LonCprOdd);
+                if (longitude > 180) longitude = longitude - 360;
                 return longitude;
             }
         }
