@@ -8,7 +8,7 @@ namespace rPlaneLibrary.Database
         {
             using (var db = new RPlaneContext())
             {
-                var message = new AdsbPackage { Message = "test" };
+                var message = new AdsbPackage { Message = package};
 
                 db.AdsbPackages.Add(message);
                 db.SaveChanges();

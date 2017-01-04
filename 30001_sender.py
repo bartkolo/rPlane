@@ -17,8 +17,8 @@ while 1:
     import time
     c.send('8D75804B580FF2CF7E9BA6F701D0'.encode())
     time.sleep(2)
-	c.send('8D75804B580FF6B283EB7A157117'.encode())
-	time.sleep(2)
+    c.send('8D75804B580FF6B283EB7A157117'.encode())
+    time.sleep(2)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))

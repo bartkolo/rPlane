@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="rPlaneConnector.AdsbHandlerService" CodeBehind="Service1.svc.cs" %>
