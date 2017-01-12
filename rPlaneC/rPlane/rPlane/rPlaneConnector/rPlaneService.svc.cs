@@ -13,7 +13,7 @@ namespace rPlaneConnector
             var dw = message.GetDownlinkFormat();
             var tc = message.GetTypeCode();
 
-            if (dw.Equals(17) && (tc > 0 && tc < 12))
+            if (dw.Equals(17) && (tc > 0 && tc < 5))
             {
                 //var ttt = new RPlaneDbHendler();
                 //ttt.AddAdsbPackage(package);

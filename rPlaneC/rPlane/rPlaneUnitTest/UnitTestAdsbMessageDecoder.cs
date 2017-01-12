@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using rPlaneLibrary;
 using rPlaneLibrary.Decoder;
 
 namespace rPlaneUnitTest
