@@ -1,4 +1,5 @@
 ﻿using Cassandra;
+using rPlaneLibrary.Cassandra;
 
 namespace ConsoleApplicationTest
 {
@@ -6,21 +7,18 @@ namespace ConsoleApplicationTest
     {
         public static void Main(string[] args)
         {
-            Cluster cluster = Cluster.Builder().AddContactPoint("127.0.0.1").Build();
-            ISession session = cluster.Connect("demo");
-            //session.CreateKeyspace("demo"); 
-            
-            if(!CheckTableExist(cluster))CreatePlaneTable(session);
+            //Cluster cluster = Cluster.Builder().AddContactPoint("127.0.0.1").Build();
+            //ISession session = cluster.Connect("demo");
+            //session.CreateKeyspace("demo");
 
-            session.Execute(
-                "insert into users (lastname, age, city, email, firstname) values ('Jones2', 35, 'Austin', 'bob@example.com', 'Bob')");
+            //if (!CheckTableExist(cluster)) CreatePlaneTable(session);
 
-            //var ps = session.Prepare("UPDATE user_profiles SET birth=? WHERE key=?");
+            CPlane plane = new CPlane();
+            plane.InsertNewPlane("dasd", "asdads", true, "dasda", false, 222, 2222, 23, "22");
 
-            //...bind different parameters every time you need to execute
-            //var statement = ps.Bind(new DateTime(1942, 11, 27), "hendrix");
-            //Execute the bound statement with the provided parameters
-            //session.Execute(statement);
+
+            //session.Execute(
+            //    "insert into users (lastname, age, city, email, firstname) values ('Jones2', 35, 'Austin', 'bob@example.com', 'Bob')");
         }
 
         public static bool CheckTableExist(Cluster cluster)
@@ -38,6 +36,5 @@ namespace ConsoleApplicationTest
 	                                PRIMARY KEY(""AircraftId"")); ";
             session.Execute(create_query);
         }
-
     }
 }
