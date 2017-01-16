@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace rPlaneLibrary
+namespace rPlaneLibrary.Decoder
 {
     public class AdsbMessage : MessageBitRepresentation
     {
         public AdsbMessage(string message) : base(message)
         {
         }
-
+        
         public string GetIcaoId()
         {
             return FirsReceivedMessage.Substring(2, 6);
@@ -49,5 +49,17 @@ namespace rPlaneLibrary
             }
             return result;
         }
+
+        public int GetAltitude()
+        {
+            var altirudeArray = DecodeMessageToList(40, 46);
+            altirudeArray.AddRange(DecodeMessageToList(48, 51));
+            var crudeAltitude = GetIntFromBitArray(altirudeArray);
+
+            if (DecodeMessageToInt(47, 47) == 1)
+                return crudeAltitude * 25 - 1000;
+            return crudeAltitude * 100 - 1000; //TODO check that calculation is proper for Q-bit equals 0
+        }
+
     }
 }

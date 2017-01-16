@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rPlaneUnitTest", "rPlaneUni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplicationTest", "ConsoleApplicationTest\ConsoleApplicationTest.csproj", "{DD11A39F-6510-4E6D-A970-DD5DF059093A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rPlaneConnector", "rPlaneConnector\rPlaneConnector.csproj", "{BEB2C615-2619-4F69-B0A0-3C4C9FFFF6D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DD11A39F-6510-4E6D-A970-DD5DF059093A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD11A39F-6510-4E6D-A970-DD5DF059093A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD11A39F-6510-4E6D-A970-DD5DF059093A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB2C615-2619-4F69-B0A0-3C4C9FFFF6D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB2C615-2619-4F69-B0A0-3C4C9FFFF6D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB2C615-2619-4F69-B0A0-3C4C9FFFF6D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB2C615-2619-4F69-B0A0-3C4C9FFFF6D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
