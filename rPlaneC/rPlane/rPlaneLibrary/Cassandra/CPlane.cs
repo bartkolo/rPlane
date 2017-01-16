@@ -1,5 +1,8 @@
 ﻿//http://www.datastax.com/dev/blog/csharp-driver-cassandra-new-mapper-linq-improvements
 
+using System.Linq;
+using Cassandra;
+
 namespace rPlaneLibrary.Cassandra
 {
     public class CPlane : AbstractCassandra<CPlane>
@@ -31,6 +34,7 @@ namespace rPlaneLibrary.Cassandra
         {
         }
 
+        //TODO change create table
         public override void CreateTable()
         {
             const string createQuery = @"CREATE TABLE demo.plane (""AircraftId"" text,""OddMessage"" text,""OddStatus"" boolean,""EvenMessage"" text,
@@ -39,18 +43,24 @@ namespace rPlaneLibrary.Cassandra
             CassandraDb.ExecuteQuery(createQuery);
         }
 
-        public void InsertNewPlane(string aircraftId, string oddMessage, bool oddStatus, string evenMessage, bool evenStatus, int altitude, double longitude, double latitude, string icao)
+        public void InsertNewPlane(string icao, string aircraftId, string oddMessage, bool oddStatus, string evenMessage, bool evenStatus, int altitude, double longitude, double latitude)
         {
             CassandraDb.ExecuteQuery(
-             @"insert into plane (""AircraftId"",""OddMessage"",""OddStatus"",""EvenMessage"",""EvenStatus"",""Altitude"",""Longitude"",""Latitude"",""ICAO"")" +
-             $" values ('{aircraftId}', '{oddMessage}', {oddStatus} ,'{evenMessage}',{evenStatus},{altitude},{longitude},{latitude},'{icao}');");
+             @"insert into plane (icao,aircraftId,""oddmessage"",""oddstatus"",""evenmessage"",""evenstatus"",""altitude"",""longitude"",""latitude"")" +
+             $" values ('{icao}','{aircraftId}', '{oddMessage}', {oddStatus} ,'{evenMessage}',{evenStatus},{altitude},{longitude},{latitude});");
         }
 
         public void UpdateRow(PlaneColumn column, object value, string key)
         {
-            var ps = CassandraDb.Session.Prepare($"UPDATE {CassandraDb.TableName} SET {column}=? WHERE key=?");
+            var ps = CassandraDb.Session.Prepare($"UPDATE {CassandraDb.TableName} SET {column}=? WHERE icao=?");
             var statement = ps.Bind(value, key);
             CassandraDb.Session.Execute(statement);
+        }
+
+        public RowSet CheckRowExist(string icao)
+        {
+            var result = CassandraDb.Session.Execute($"SELECT * FROM plane where icao='{icao}'");
+            return result;
         }
     }
 }

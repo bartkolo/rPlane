@@ -11,10 +11,12 @@ namespace ConsoleApplicationTest
             //ISession session = cluster.Connect("demo");
             //session.CreateKeyspace("demo");
 
-            //if (!CheckTableExist(cluster)) CreatePlaneTable(session);
+            //if (!CheckTableExist(cluster)) CreatePlaneTable(session);          
 
             CPlane plane = new CPlane();
-            plane.InsertNewPlane("dasd", "asdads", true, "dasda", false, 222, 2222, 23, "22");
+            //plane.CheckRowExist("2d");
+            plane.InsertNewPlane("223", "2d", "asdads", true, "dasda", false, 222, 2222, 23);
+            plane.UpdateRow(CPlane.PlaneColumn.Latitude, 9999.0, "2d");
 
 
             //session.Execute(
@@ -31,9 +33,9 @@ namespace ConsoleApplicationTest
         public static void CreatePlaneTable(ISession session)
         {
             string create_query =
-                @"CREATE TABLE demo.plane (""AircraftId"" text,""OddMessage"" text,""OddStatus"" boolean,""EvenMessage"" text,
-	                                ""EvenStatus"" boolean,	""Altitude"" int, ""Longitude"" double, ""Latitude"" double, ""ICAO"" text,
-	                                PRIMARY KEY(""AircraftId"")); ";
+                @"CREATE TABLE demo.plane (""aircraftid"" text,""oddmessage"" text,""oddstatus"" boolean,""evenmessage"" text,
+	                                ""evenstatus"" boolean,	""altitude"" int, ""longitude"" double, ""latitude"" double, ""icao"" text,
+	                                PRIMARY KEY(""aircraftid"")); ";
             session.Execute(create_query);
         }
     }
