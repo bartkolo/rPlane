@@ -8,7 +8,7 @@ namespace rPlaneLibrary.Decoder
         public AdsbMessage(string message) : base(message)
         {
         }
-        
+
         public string GetIcaoId()
         {
             return FirsReceivedMessage.Substring(2, 6);
@@ -60,6 +60,5 @@ namespace rPlaneLibrary.Decoder
                 return crudeAltitude * 25 - 1000;
             return crudeAltitude * 100 - 1000; //TODO check that calculation is proper for Q-bit equals 0
         }
-
     }
 }

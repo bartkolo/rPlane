@@ -9,6 +9,7 @@ namespace rPlaneLibrary.Decoder
 {
     public class MessageBitRepresentation
     {
+        #region Properties
         public const string Index = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ#####_###############0123456789######";
         public BitArray MessageBitArray { get; set; }
 
@@ -21,6 +22,7 @@ namespace rPlaneLibrary.Decoder
         public string FirsReceivedMessage { get; set; }
 
         public string SecondReceivedMessage { get; set; }
+        #endregion
 
         public MessageBitRepresentation(string message)
         {

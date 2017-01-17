@@ -4,6 +4,7 @@ namespace rPlaneLibrary.Decoder
 {
     public class AircraftPosition : MessageBitRepresentation
     {
+        #region Properties
         public double LatCprEven { get; set; }
         public double LonCprEven { get; set; }
         public double LatCprOdd { get; set; }
@@ -13,6 +14,7 @@ namespace rPlaneLibrary.Decoder
         public int ZoneE { get; set; }
         public int ZoneO { get; set; }
         public double Latitude { get; set; }
+        #endregion
 
         public AircraftPosition(string evenMessage, string oddMessage) : base(evenMessage, oddMessage)
         {
@@ -29,6 +31,8 @@ namespace rPlaneLibrary.Decoder
         public double GetLatitude()
         {
             var j = GetLatitudeIndex(LatCprEven, LatCprOdd);
+            //if (j < 0)
+            //    return -1000;
 
             var latE = 6 * (((j - 60 * Math.Floor((double)j / 60)) + LatCprEven));
 

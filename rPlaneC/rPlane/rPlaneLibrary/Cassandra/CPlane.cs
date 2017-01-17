@@ -1,6 +1,5 @@
 ﻿//http://www.datastax.com/dev/blog/csharp-driver-cassandra-new-mapper-linq-improvements
 
-using System.Linq;
 using Cassandra;
 
 namespace rPlaneLibrary.Cassandra
@@ -20,6 +19,7 @@ namespace rPlaneLibrary.Cassandra
             ICAO
         }
 
+        #region Properties  
         public string AircraftId { get; set; }
         public string OddMessage { get; set; }
         public bool OddStatus { get; set; }
@@ -29,17 +29,17 @@ namespace rPlaneLibrary.Cassandra
         public double Longitude { get; set; }
         public double Latitude { get; set; }
         public string ICAO { get; set; }
+        #endregion
 
         public CPlane() : base("demo", "plane")
         {
         }
 
-        //TODO change create table
         public override void CreateTable()
         {
-            const string createQuery = @"CREATE TABLE demo.plane (""AircraftId"" text,""OddMessage"" text,""OddStatus"" boolean,""EvenMessage"" text,
-	                                ""EvenStatus"" boolean,	""Altitude"" int, ""Longitude"" double, ""Latitude"" double, ""ICAO"" text,
-	                               PRIMARY KEY(""AircraftId"")); ";
+            const string createQuery = @"CREATE TABLE demo.plane (""icao"" text ,""aircraftid"" text,""oddmessage"" text,""oddstatus"" boolean,""evenmessage"" text,
+	                                ""evenstatus"" boolean,	""altitude"" int, ""longitude"" double, ""latitude"" double,
+	                               PRIMARY KEY(""icao"")); ";
             CassandraDb.ExecuteQuery(createQuery);
         }
 
